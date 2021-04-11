@@ -25,5 +25,12 @@ namespace AlgorithmLibrary
             return (int)start.Subtract(other.start).TotalMinutes;
 
         }
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            TimeInterval other = obj as TimeInterval;
+            if (start.Equals(other.start) && end.Equals(other.end)) return true;
+            return false;
+        }
     }
 }
