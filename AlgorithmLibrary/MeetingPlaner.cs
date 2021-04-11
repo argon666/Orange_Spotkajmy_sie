@@ -8,17 +8,19 @@ namespace AlgorithmLibrary
 {
     public class MeetingPlaner : IMeetingPlaner
     {
-        public List<TimeInterval> PlanMetting(ICalendar calendar1, ICalendar calendar2, int duration)
+        public List<TimeInterval> PlanMeeting(ICalendar calendar1, ICalendar calendar2, int duration)
         {
-            int i = 0;
+            List<TimeInterval> possibleMettings = new List<TimeInterval>();
+            if (calendar1 == null || calendar2 == null || duration < 1)
+            {
+                return possibleMettings;
+            }
             List<TimeInterval> freeTime1 = calendar1.Free_time(duration);
             List<TimeInterval> freeTime2 = calendar2.Free_time(duration);
-            List<TimeInterval> possibleMettings = new List<TimeInterval>();
             foreach (var item1 in freeTime1)
             {
                 foreach (var item2 in freeTime2)
                 {
-                    i++;
                     var posibleMetting = Overlapping(item1, item2, duration);
                     if (posibleMetting != null)
                     {
@@ -26,7 +28,6 @@ namespace AlgorithmLibrary
                     }
                 }
             }
-            Console.WriteLine(i);
             return possibleMettings;
 
         }

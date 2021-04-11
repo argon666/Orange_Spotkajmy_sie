@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AlgorithmLibrary
 {
-    
+
     public class TimeInterval : IComparable<TimeInterval>
     {
         public DateTime start { get; set; }
