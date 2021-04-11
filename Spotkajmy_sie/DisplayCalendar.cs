@@ -11,11 +11,11 @@ namespace Spotkajmy_sie
         public string PossibleMeetingsToString(List<TimeInterval> possiblemeetings)
         {
             string text = "[";
-            for (int i = 0; i < possiblemeetings.Count-1; i++)
+            for (int i = 0; i < possiblemeetings.Count - 1; i++)
             {
                 text += possiblemeetings[i].ToString() + ", ";
             }
-            text += possiblemeetings[possiblemeetings.Count-1].ToString() + "]";
+            text += possiblemeetings[possiblemeetings.Count - 1].ToString() + "]";
             return text;
         }
     }

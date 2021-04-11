@@ -13,13 +13,17 @@ namespace Spotkajmy_sie
             ILoadCalendar loadCalendar = new LoadCalendar();
             IMeetingPlaner meetingPlaner = new MeetingPlanerV2();
             IDisplayCalendar displayCalendar = new DisplayCalendar();
-            Calendar calendar1=loadCalendar.GetCalendar();
+            IMeetingDurationConverter meetingDurationConverter = new MeetingDurationConverter();
+            
+            Calendar calendar1 = loadCalendar.GetCalendar();
             Calendar calendar2 = loadCalendar.GetCalendar();
-            var AvaibleTimes = meetingPlaner.PlanMetting(calendar1, calendar2, 30);
-            Console.WriteLine(displayCalendar.PossibleMeetingsToString(AvaibleTimes));
+            int duration = meetingDurationConverter.DurationToInt();
 
-  
+            var AvaibleTimes = meetingPlaner.PlanMeeting(calendar1, calendar2, duration);
+            Console.WriteLine("Avaible dates for meeting");
+            Console.WriteLine(displayCalendar.PossibleMeetingsToString(AvaibleTimes));
             Console.ReadKey();
+
         }
     }
 }
