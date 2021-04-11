@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AlgorithmLibrary
 {
-    public class MeetingPlaner : IMeetingPlaner
+    public class MeetingPlanner : IMeetingPlanner
     {
         public List<TimeInterval> PlanMeeting(ICalendar calendar1, ICalendar calendar2, int duration)
         {

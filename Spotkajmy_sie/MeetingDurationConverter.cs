@@ -23,7 +23,7 @@ namespace Spotkajmy_sie
             catch (Exception)
             {
 
-                Console.WriteLine("Can't conver to minutes");
+                Console.WriteLine("Can't convert to minutes");
             }
             return 1;
         }

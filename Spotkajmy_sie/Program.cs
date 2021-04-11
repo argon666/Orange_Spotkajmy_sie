@@ -11,7 +11,7 @@ namespace Spotkajmy_sie
         static void Main(string[] args)
         {
             ILoadCalendar loadCalendar = new LoadCalendar();
-            IMeetingPlaner meetingPlaner = new MeetingPlanerV2();
+            IMeetingPlanner meetingPlanner = new MeetingPlannerV2();
             IDisplayCalendar displayCalendar = new DisplayCalendar();
             IMeetingDurationConverter meetingDurationConverter = new MeetingDurationConverter();
             
@@ -19,9 +19,9 @@ namespace Spotkajmy_sie
             Calendar calendar2 = loadCalendar.GetCalendar();
             int duration = meetingDurationConverter.DurationToInt();
 
-            var AvaibleTimes = meetingPlaner.PlanMeeting(calendar1, calendar2, duration);
+            var availableTimes = meetingPlanner.PlanMeeting(calendar1, calendar2, duration);
             Console.WriteLine("Avaible dates for meeting");
-            Console.WriteLine(displayCalendar.PossibleMeetingsToString(AvaibleTimes));
+            Console.WriteLine(displayCalendar.PossibleMeetingsToString(availableTimes));
             Console.ReadKey();
 
         }

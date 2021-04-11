@@ -12,7 +12,7 @@ namespace AlgorithmLibraryTests
     public class CalendarTests
     {
         [TestMethod()]
-        public void Free_time_correct()
+        public void FreeTime_ValidData_ReturnsFreeTimeList()
         {
             Calendar calendar = new Calendar();
             calendar.working_hours = new TimeInterval { start = DateTime.Parse("09:00"), end = DateTime.Parse("19:55") };
@@ -69,7 +69,7 @@ namespace AlgorithmLibraryTests
             CollectionAssert.AreEqual(result, expected);
         }
         [TestMethod()]
-        public void Free_time_no_free_time_retun_empty_list()
+        public void FreeTime_WhenThereAreNotFreeTime_ReturnsEmptyList()
         {
 
             Calendar calendar = new Calendar();
@@ -93,7 +93,7 @@ namespace AlgorithmLibraryTests
             Assert.AreEqual(result.Count, 0);
         }
         [TestMethod()]
-        public void Free_time_empty_working_hours_return_empty_list()
+        public void FreeTime_WhenWorkingHoursAreEmpty_ReturnsEmptyList()
         {
             Calendar calendar = new Calendar();
             calendar.planned_meeting.Add(new TimeInterval { start = DateTime.Parse("09:00"), end = DateTime.Parse("10:30") });
@@ -105,14 +105,14 @@ namespace AlgorithmLibraryTests
             Assert.AreEqual(result.Count, 0);
         }
         [TestMethod()]
-        public void Free_time_empty_meetings()
+        public void FreeTime_WhenMeetingsAreEmpty_ReturnsWorkingHoursAsFreeTime()
         {
 
             Calendar calendar = new Calendar();
             calendar.working_hours = new TimeInterval { start = DateTime.Parse("09:00"), end = DateTime.Parse("19:55") };
             var result = calendar.Free_time(30);
             List<TimeInterval> expected = new List<TimeInterval>();
-            expected.Add(new TimeInterval { start = DateTime.Parse("09:00"), end = DateTime.Parse("19:55") });
+            expected.Add(calendar.working_hours);
             CollectionAssert.AreEqual(result, expected);
         }
     }

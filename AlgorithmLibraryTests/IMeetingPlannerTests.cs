@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 namespace AlgorithmLibrary.Tests
 {
     [TestClass()]
-    public class IMeetingPlanerTests
+    public class IMeetingPlannerTests
     {
-        private readonly IMeetingPlaner meetingPlaner = new MeetingPlanerV2();
+        private readonly IMeetingPlanner meetingPlanner = new MeetingPlannerV2();
         [TestMethod()]
-        public void PlanMeeting_both_calendars_null_return_empty_list()
+        public void PlanMeeting_WhenBothCalendarsAreNull_ReturnsEmptyList()
         {
             Calendar calendar1 = null;
             Calendar calendar2 = null;
-            IMeetingPlaner plan = new MeetingPlanerV2();
+            IMeetingPlanner plan = new MeetingPlannerV2();
             var result = plan.PlanMeeting(calendar1, calendar2, 1);
             Assert.AreEqual(result.Count, 0);
         }
         [TestMethod()]
-        public void PlanMeeting_duration_less_1_return_null()
+        public void PlanMeeting_WhenDurationIsLessThan1_ReturnsEmptyList()
         {
             Calendar calendar1 = new Calendar();
             calendar1.working_hours = new TimeInterval { start = DateTime.Parse("09:00"), end = DateTime.Parse("19:55") };
@@ -37,11 +37,11 @@ namespace AlgorithmLibrary.Tests
             calendar2.planned_meeting.Add(new TimeInterval { start = DateTime.Parse("14:30"), end = DateTime.Parse("15:00") });
             calendar2.planned_meeting.Add(new TimeInterval { start = DateTime.Parse("16:00"), end = DateTime.Parse("17:00") });
 
-            var result = meetingPlaner.PlanMeeting(calendar1, calendar2, 0);
+            var result = meetingPlanner.PlanMeeting(calendar1, calendar2, 0);
             Assert.AreEqual(result.Count, 0);
         }
         [TestMethod()]
-        public void PlanMeeting_zero_answers_return_empty_list()
+        public void PlanMeeting_WhenCantFindAnswer_ReturnsEmptyList()
         {
             Calendar calendar1 = new Calendar();
             calendar1.working_hours = new TimeInterval { start = DateTime.Parse("09:00"), end = DateTime.Parse("19:55") };
@@ -56,11 +56,11 @@ namespace AlgorithmLibrary.Tests
             calendar2.planned_meeting.Add(new TimeInterval { start = DateTime.Parse("14:30"), end = DateTime.Parse("15:00") });
             calendar2.planned_meeting.Add(new TimeInterval { start = DateTime.Parse("16:00"), end = DateTime.Parse("17:00") });
 
-            var result = meetingPlaner.PlanMeeting(calendar1, calendar2, 300);
+            var result = meetingPlanner.PlanMeeting(calendar1, calendar2, 300);
             Assert.AreEqual(result.Count, 0);
         }
         [TestMethod()]
-        public void PlanMeeting_correct_data()
+        public void PlanMeeting_ValidData_ReturnsPossibleMeetings()
         {
             Calendar calendar1 = new Calendar();
             calendar1.working_hours = new TimeInterval { start = DateTime.Parse("09:00"), end = DateTime.Parse("19:55") };
@@ -80,7 +80,7 @@ namespace AlgorithmLibrary.Tests
             expected.Add(new TimeInterval { start = DateTime.Parse("15:00"), end = DateTime.Parse("16:00") });
             expected.Add(new TimeInterval { start = DateTime.Parse("18:00"), end = DateTime.Parse("18:30") });
 
-            List<TimeInterval> result = meetingPlaner.PlanMeeting(calendar1, calendar2, 30);
+            List<TimeInterval> result = meetingPlanner.PlanMeeting(calendar1, calendar2, 30);
             CollectionAssert.AreEqual(result, expected);
         }
     }
