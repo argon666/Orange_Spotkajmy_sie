@@ -4,6 +4,6 @@ namespace AlgorithmLibrary
 {
     public interface IMeetingPlaner
     {
-        List<TimeInterval> PlanMetting(ICalendar calendar1, ICalendar calendar2, int minDuration);
+        List<TimeInterval> PlanMeeting(ICalendar calendar1, ICalendar calendar2, int minDuration);
     }
 }
